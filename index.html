@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <!-- PWA / App Standalone Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#F6F8F5">
     <title>Forest Finance</title>
+    <link rel="icon" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png">
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -15,9 +24,10 @@
         }
     </script>
 </head>
+
 <body>
     <div class="app-layout">
-        
+
         <!-- Header -->
         <header class="app-topbar">
             <!-- Left Streak Counter -->
@@ -25,10 +35,10 @@
                 <div id="streak-badge" class="streak-badge" title="連續記帳天數">
                     <i data-lucide="flame"></i><span id="streak-count" style="margin-left: 2px;">0</span>
                 </div>
-            </div> 
-            
+            </div>
+
             <h1 id="page-title" data-i18n="title_ledger" style="flex:1; text-align:center;">帳本</h1>
-            
+
             <!-- Global Setting Globe Icon -->
             <div style="width:50px; display:flex; justify-content:flex-end;">
                 <button id="globe-btn" class="topbar-action-btn" aria-label="Global Settings">
@@ -38,7 +48,7 @@
         </header>
 
         <main class="pages-container">
-            
+
             <!-- Ledger -->
             <section id="page-ledger" class="page-section active">
                 <div class="calendar-wrapper">
@@ -64,9 +74,10 @@
             <!-- Accounts -->
             <section id="page-accounts" class="page-section">
                 <div class="balance-section">
-                    <h2 style="margin-bottom:12px; font-weight:600; color:var(--text-primary); font-size: 1.1rem;" data-i18n="acc_total">總資產結餘</h2>
+                    <h2 style="margin-bottom:12px; font-weight:600; color:var(--text-primary); font-size: 1.1rem;"
+                        data-i18n="acc_total">總資產結餘</h2>
                     <h1 class="main-balance" id="acc-total-balance">$0.00</h1>
-                    
+
                     <div class="balance-summary" style="margin-top:24px;">
                         <div class="summary-item income">
                             <div class="summary-icon"><i data-lucide="arrow-down-left"></i></div>
@@ -91,13 +102,14 @@
             <section id="page-add" class="page-section">
                 <div class="form-wrapper">
                     <div class="type-selector">
-                        <button type="button" class="type-btn active" data-type="expense" data-i18n="btn_add_expense">支出</button>
+                        <button type="button" class="type-btn active" data-type="expense"
+                            data-i18n="btn_add_expense">支出</button>
                         <button type="button" class="type-btn" data-type="income" data-i18n="btn_add_income">收入</button>
                     </div>
 
                     <form id="tx-form">
                         <input type="hidden" id="tx-type" value="expense">
-                        
+
                         <div class="form-group">
                             <label data-i18n="label_date">日期</label>
                             <input type="date" id="tx-date" required>
@@ -107,17 +119,18 @@
                             <label data-i18n="label_amount">金額</label>
                             <input type="number" id="tx-amount" step="0.01" min="0" required>
                         </div>
-                        
+
                         <div class="form-group">
                             <label data-i18n="label_category">類別</label>
                             <select id="tx-category" required></select>
                         </div>
-                        
+
                         <div class="form-group">
                             <label data-i18n="label_note">備註 (選填)</label>
-                            <input type="text" id="tx-note" data-i18n-pl="pl_note" placeholder="記錄細節" autocomplete="off">
+                            <input type="text" id="tx-note" data-i18n-pl="pl_note" placeholder="記錄細節"
+                                autocomplete="off">
                         </div>
-                        
+
                         <button type="submit" class="submit-btn" id="submit-btn" data-i18n="btn_save">儲存紀錄</button>
                     </form>
                 </div>
@@ -126,12 +139,15 @@
             <!-- Charts -->
             <section id="page-charts" class="page-section">
                 <div class="form-wrapper" style="text-align:center;">
-                    <h2 style="margin-bottom:16px;font-size:1rem;color:var(--text-muted);" data-i18n="chart_title">歷史各類別支出比例</h2>
+                    <h2 style="margin-bottom:16px;font-size:1rem;color:var(--text-muted);" data-i18n="chart_title">
+                        歷史各類別支出比例</h2>
                     <!-- Chart.js Canvas -->
                     <div style="position:relative; width:100%; max-width:300px; margin: 0 auto; min-height:300px;">
                         <canvas id="expenseChart"></canvas>
-                        <div id="chart-empty-msg" class="empty-state" style="display:none; position:absolute; top:50%; width:100%; transform:translateY(-50%);">
-                            <i data-lucide="pie-chart" style="width:36px;height:36px;opacity:0.5;margin-bottom:8px;"></i>
+                        <div id="chart-empty-msg" class="empty-state"
+                            style="display:none; position:absolute; top:50%; width:100%; transform:translateY(-50%);">
+                            <i data-lucide="pie-chart"
+                                style="width:36px;height:36px;opacity:0.5;margin-bottom:8px;"></i>
                             <span data-i18n="chart_empty">無資料製圖</span>
                         </div>
                     </div>
@@ -148,7 +164,7 @@
                             <p class="profile-sub">Local Device</p>
                         </div>
                     </div>
-                    
+
                     <button class="settings-action danger" id="logout-btn">
                         <i data-lucide="log-out"></i>
                         <span data-i18n="btn_logout">登出帳號</span>
@@ -214,4 +230,5 @@
     <script src="i18n.js"></script>
     <script src="script.js"></script>
 </body>
+
 </html>
